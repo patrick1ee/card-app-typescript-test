@@ -1,5 +1,5 @@
 import {createContext , useState, FC, ReactNode, useEffect} from 'react'
-import {Entry, EntryContextType} from '../@types/context'
+import {Entry, EntryContextType, ThemeContextType} from '../@types/context'
 import axios from 'axios'
 
 export const EntryContext = createContext<EntryContextType | null>(null);
@@ -41,5 +41,23 @@ export const EntryProvider: React.FC<{children : ReactNode}> = ({children}) => {
           {children}
         </EntryContext.Provider>
       )
+}
+
+export const ThemeContext = createContext<ThemeContextType | null>(null);
+
+export const ThemeProvider: FC<{children: ReactNode}> = ({children}) => {
+    const [mode, setMode] = useState<string>('light');
+    const toggleMode = () => {
+        if(mode == 'light'){
+            setMode('dark')
+        }else{
+            setMode('light')
+        }
+    }
+    return (
+        <ThemeContext.Provider value={{mode, toggleMode}}>
+            {children}
+        </ThemeContext.Provider>
+    )
 }
 
