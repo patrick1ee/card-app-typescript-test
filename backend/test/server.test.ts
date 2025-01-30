@@ -1,18 +1,18 @@
-import { server } from "../src/server"
 import Prisma from "../src/db";
+import { server } from "../src/server";
 
 describe("GET /get/", () => {
-  it ("should assert that the fetched entries array is empty", async () => {
+  it("should assert that the fetched entries array is empty", async () => {
+    Prisma.entry.findMany = jest.fn().mockResolvedValue([]);
     const response = await server.inject({
-      method: 'GET',
-      url: '/get/'
+      method: "GET",
+      url: "/get/",
     });
-    
-    expect(response.statusCode).toBe(200)
-    expect(JSON.parse(response.body)).toEqual([])
-  })
-});
 
+    expect(response.statusCode).toBe(200);
+    expect(JSON.parse(response.body)).toEqual([]);
+  });
+});
 
 describe("GET /get/", () => {
   it("should return all entries in the database", async () => {
@@ -20,24 +20,24 @@ describe("GET /get/", () => {
       { id: "1", title: "Test Entry 1", created_at: new Date(), scheduled: new Date("2025-02-02T00:00:00") },
       { id: "2", title: "Test Entry 2", created_at: new Date(), scheduled: new Date("2025-03-02T09:00:00") },
     ];
-  
+
     Prisma.entry.findMany = jest.fn().mockResolvedValue(mockEntries);
-  
+
     const response = await server.inject({
       method: "GET",
       url: "/get/",
     });
 
-    const expectedEntries = mockEntries.map(entry => ({
+    const expectedEntries = mockEntries.map((entry) => ({
       ...entry,
       created_at: entry.created_at.toISOString(),
       scheduled: entry.scheduled.toISOString(),
     }));
-  
+
     expect(response.statusCode).toBe(200);
     expect(JSON.parse(response.body)).toEqual(expectedEntries);
   });
-})
+});
 
 describe("GET /get/:id", () => {
   it("should return a specific entry by ID", async () => {
