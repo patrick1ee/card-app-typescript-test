@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .ui-card {
-    @apply bg-gray-300 dark:bg-gray-700 text-neutral-900 dark:text-neutral-50 
+  @apply bg-gray-300 dark:bg-gray-700 text-neutral-900 dark:text-neutral-50 dark:border-gray-500;
 }
 
 .ui-card-input {
-    @apply p-3 rounded-md dark:bg-gray-600 dark:text-neutral-50
+  @apply p-3 rounded-md dark:bg-gray-600 dark:text-neutral-50 dark:border-gray-400;
 }

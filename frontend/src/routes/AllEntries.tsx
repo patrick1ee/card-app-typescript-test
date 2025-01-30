@@ -26,9 +26,14 @@ export default function AllEntries() {
           <div
             id={entry.id}
             key={index}
-            className="ui-card shadow-md shadow-gray-500 m-3 p-4 rounded flex flex-col justify-between"
+            className="ui-card shadow-md shadow-gray-500 dark:shadow-none m-3 p-4 rounded flex flex-col justify-between"
           >
-            <h1 className="font-bold text-sm md:text-lg">{entry.title}</h1>
+            <div className="flex justify-between">
+              <h1 className="font-bold text-sm md:text-lg">{entry.title}</h1>
+              <time className="text-right text-sm md:text-lg">
+                {new Date(entry.scheduled.toString()).toLocaleDateString()}
+              </time>
+            </div>
             <p className="text-center text-lg font-light md:mt-2 md:mb-4 mt-1 mb-3">{entry.description}</p>
             <section className="flex items-center justify-between flex-col md:flex-row pt-2 md:pt-0">
               <div className="flex justify-center">
@@ -49,11 +54,8 @@ export default function AllEntries() {
                   🖊
                 </button>
               </div>
-              <time className="text-right text-sm md:text-lg">
-                {new Date(entry.created_at.toString()).toLocaleDateString()}
-              </time>
-              <time className="text-right text-sm md:text-lg">
-                {new Date(entry.scheduled.toString()).toLocaleDateString()}
+              <time className="text-right text-sm md:text-sm">
+                {"Created " + new Date(entry.created_at.toString()).toLocaleDateString()}
               </time>
             </section>
           </div>
