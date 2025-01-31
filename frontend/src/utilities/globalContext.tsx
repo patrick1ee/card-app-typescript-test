@@ -41,6 +41,8 @@ export const EntryProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   );
 };
 
+
+
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
@@ -48,7 +50,6 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const localThemeMode = localStorage.getItem("THEME_MODE");
     return (localThemeMode as ThemeMode) || "light";
   });
-
   useEffect(() => {
     document.documentElement.classList.toggle("dark", mode === "dark");
     try {
